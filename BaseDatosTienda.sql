@@ -11,9 +11,9 @@ FROM producto;
  FROM producto; 
 
 -- 4 Llista el nom dels productos, el preu en euros i el preu en dòlars nord-americans (USD).
-SELECT nombre, (precio/22.09), (precio/19.54) 
+SELECT nombre, (precio/22.09)AS precio_EURO, (precio/19.54) AS precio_USD
 FROM producto;
-!!!!!!!!!!!!!
+
 -- 5 Llista el nom dels productos, el preu en euros i el preu en dòlars nord-americans. Utilitza els següents àlies per a les columnes: nom de producto, euros, dòlars nord-americans.
 SELECT nombre AS nom_de_producto, (precio*0.89) AS EURO, (precio/19.54) AS USD 
 FROM producto;
@@ -35,10 +35,10 @@ SELECT nombre, ROUND(precio)
 FROM producto; 
 
 -- 10 Llista els noms i els preus de tots els productos de la taula producto, truncant el valor del preu per a mostrar-lo sense cap xifra decimal.
-SELECT nombre, ROUND(precio, 0)AS 'preu €' , ROUND((precio * 1.13)  , 0)AS 'preu USD'
+SELECT nombre AS nombre_producto, ROUND(precio, 0)AS 'preu EURO' , ROUND((precio * 1.13)  , 0)AS 'preu USD'
 FROM producto; 
+-- !!!!!!!!!!!!!!!!
 
-!!!!!!!!!!!!!!!!
 -- 11 Llista el codi dels fabricants que tenen productos en la taula producto.
 SELECT codigo_fabricante 
 FROM producto;
@@ -120,7 +120,7 @@ JOIN fabricante
 ON fabricante.codigo = producto.codigo_fabricante
 WHERE fabricante.codigo = 2;
 -- 27 Retorna una llista de tots els productes del fabricant Crucial que tinguin un preu major que 200€.
-SELECT producto.nombre , producto.precio , fabricante.nombre AS nombre_fabricante FROM producto
+ SELECT producto.nombre , producto.precio , fabricante.nombre AS nombre_fabricante FROM producto
  JOIN fabricante
  ON fabricante.codigo = producto.codigo_fabricante
  WHERE fabricante.codigo = 6 AND precio > 200 ;
@@ -217,7 +217,7 @@ SELECT producto.nombre , producto.precio , fabricante.nombre AS nombre_fabricant
  WHERE codigo_fabricante = 2
  ORDER BY precio DESC LIMIT 1); 
  -- 41 Llesta tots els productes del fabricant Asus que tenen un preu superior al preu mitjà de tots els seus productes.
-SELECT producto.nombre , producto.precio, fabricante.nombre FROM producto
+ SELECT producto.nombre , producto.precio, fabricante.nombre FROM producto
  INNER JOIN fabricante
  ON  producto.codigo_fabricante = fabricante.codigo
  WHERE fabricante.codigo = 1
